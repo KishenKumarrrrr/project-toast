@@ -24,6 +24,10 @@ function ToastProvider({ children }) {
     setToastData(newToastData)
   }
 
+  const removeAllToasts = () => {
+    setToastData([])
+  }
+
 
 
   return (
@@ -32,6 +36,7 @@ function ToastProvider({ children }) {
         toastData,
         addToast,
         removeToast,
+        removeAllToasts
       }}
     >
       {children}

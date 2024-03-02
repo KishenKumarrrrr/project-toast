@@ -14,7 +14,23 @@ function ToastPlayground() {
   const [toastVariant, setToastVariant] = React.useState('notice');
   const [toastMessage, setToastMessage] = React.useState('')
 
-  const { toastData, removeToast, addToast } = React.useContext(ToastContext)
+  const { toastData, removeToast, addToast, removeAllToasts } = React.useContext(ToastContext)
+
+
+  React.useEffect(() => {
+
+    const handleEscapeDown = (e) => {
+      if (e.code === 'Escape') {
+        removeAllToasts()
+      }
+    }
+
+    document.addEventListener('keydown', handleEscapeDown)
+
+    return () => {
+      document.removeEventListener('keydown', handleEscapeDown)
+    }
+  }, [toastData])
 
   return (
     <div className={styles.wrapper}>
