@@ -18,16 +18,22 @@ const ICONS_BY_VARIANT = {
   error: AlertOctagon,
 };
 
-function Toast() {
+function Toast(props) {
+
+  const { message, variant, onClose } = props
+
+  const toastVariant = Object.keys(ICONS_BY_VARIANT).includes(variant) ? variant : 'notice'
+  const ToastIcon = ICONS_BY_VARIANT[toastVariant]
+
   return (
-    <div className={`${styles.toast} ${styles.notice}`}>
+    <div className={`${styles.toast} ${styles[toastVariant]}`}>
       <div className={styles.iconContainer}>
-        <Info size={24} />
+        <ToastIcon size={24} /> 
       </div>
       <p className={styles.content}>
-        16 photos have been uploaded
+        {message}
       </p>
-      <button className={styles.closeButton}>
+      <button className={styles.closeButton} onClick={onClose}>
         <X size={24} />
         <VisuallyHidden>Dismiss message</VisuallyHidden>
       </button>

@@ -11,6 +11,7 @@ function ToastPlayground() {
 
   const [toastVariant, setToastVariant] = React.useState('notice');
   const [toastMessage, setToastMessage] = React.useState('')
+  const [displayToast, setDisplayToast] = React.useState(false);
 
   return (
     <div className={styles.wrapper}>
@@ -19,7 +20,14 @@ function ToastPlayground() {
         <h1>Toast Playground</h1>
       </header>
 
-      <Toast />
+      {
+        displayToast && 
+        <Toast 
+          message={toastMessage} 
+          variant={toastVariant} 
+          onClose={() => setDisplayToast(false)}
+        />
+      }
 
       <div className={styles.controlsWrapper}>
         <div className={styles.row}>
@@ -27,13 +35,16 @@ function ToastPlayground() {
             htmlFor="message"
             className={styles.label}
             style={{ alignSelf: 'baseline' }}
-            value={toastMessage}
-            onChange={(event) => setToastMessage(event.target.value)}
           >
             Message
           </label>
           <div className={styles.inputWrapper}>
-            <textarea id="message" className={styles.messageInput} />
+            <textarea 
+            id="message" 
+            className={styles.messageInput} 
+            value={toastMessage}
+            onChange={(event) => setToastMessage(event.target.value)}
+            />
           </div>
         </div>
 
@@ -65,7 +76,11 @@ function ToastPlayground() {
           <div
             className={`${styles.inputWrapper} ${styles.radioWrapper}`}
           >
-            <Button>Pop Toast!</Button>
+            <Button
+              onClick={() => setDisplayToast(true)}
+            >
+              Pop Toast!
+            </Button>
           </div>
         </div>
       </div>
