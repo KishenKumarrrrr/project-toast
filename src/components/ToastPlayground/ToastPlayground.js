@@ -1,4 +1,5 @@
 import React from 'react';
+import useEscapeKey from '../../hooks/useEscapeKey';
 
 import Button from '../Button';
 import Toast from '../Toast/Toast';
@@ -16,21 +17,7 @@ function ToastPlayground() {
 
   const { toastData, removeToast, addToast, removeAllToasts } = React.useContext(ToastContext)
 
-
-  React.useEffect(() => {
-
-    const handleEscapeDown = (e) => {
-      if (e.code === 'Escape') {
-        removeAllToasts()
-      }
-    }
-
-    document.addEventListener('keydown', handleEscapeDown)
-
-    return () => {
-      document.removeEventListener('keydown', handleEscapeDown)
-    }
-  }, [toastData])
+  useEscapeKey(toastData, removeAllToasts)
 
   return (
     <div className={styles.wrapper}>
