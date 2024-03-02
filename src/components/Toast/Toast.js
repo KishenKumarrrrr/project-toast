@@ -31,9 +31,17 @@ function Toast(props) {
         <ToastIcon size={24} /> 
       </div>
       <p className={styles.content}>
+        <div class="VisuallyHidden_wrapper">
+          error -
+        </div>
+        Something went wrong! Please contact customer support
         {message}
       </p>
-      <button className={styles.closeButton} onClick={onClose}>
+      <button 
+        className={styles.closeButton}
+        aria-label="Dismiss message"
+        aria-live='off'
+        onClick={onClose}>
         <X size={24} />
         <VisuallyHidden>Dismiss message</VisuallyHidden>
       </button>
